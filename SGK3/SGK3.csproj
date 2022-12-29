@@ -15,8 +15,4 @@
     <PackageReference Include="Usb.Net" Version="4.2.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 </Project>
