@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace SGK3
+namespace SGK3LEDAPI
 {
     /// <summary>
     /// Allows changing colors of individual keys.

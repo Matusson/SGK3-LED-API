@@ -1,4 +1,4 @@
-﻿namespace SGK3
+﻿namespace SGK3LEDAPI
 {
     /// <summary>
     /// Used to identify physical keys.

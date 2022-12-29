@@ -1,4 +1,4 @@
-﻿namespace SGK3
+﻿namespace SGK3LEDAPI
 {
     /// <summary>
     /// Allows general brightness control.

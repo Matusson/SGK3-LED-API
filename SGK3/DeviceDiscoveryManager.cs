@@ -3,7 +3,7 @@ using Hid.Net.Windows;
 using Usb.Net.Windows;
 using Microsoft.Extensions.Logging;
 
-namespace SGK3
+namespace SGK3LEDAPI
 {
     /// <summary>
     /// Handles discovery and initialization of they keyboard device.
