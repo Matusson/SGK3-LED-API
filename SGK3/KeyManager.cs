@@ -2,8 +2,17 @@
 
 namespace SGK3
 {
+    /// <summary>
+    /// Allows changing colors of individual keys.
+    /// </summary>
     public static class KeyManager
     {
+        /// <summary>
+        /// Set color of the specified key.
+        /// </summary>
+        /// <param name="keyId"></param>
+        /// <param name="color"></param>
+        /// <returns></returns>
         public static Task SetKeyColor(Key keyId, Color color)
         {
             List<byte> data = new();

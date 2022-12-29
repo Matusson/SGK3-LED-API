@@ -1,48 +1,41 @@
 ﻿using Device.Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SGK3
 {
-    public static class ComManager
+    internal static class ComManager
     {
-        public static IDevice Device { get; set; }
+        internal static IDevice Device { get; set; }
 
         /// <summary>
         /// Sends specified data to the keyboard.
         /// </summary>
         /// <param name="data"></param>
-        /// <param name="flash"></param>
+        /// <param name="longFlash"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task Send(byte[] data, bool flash = false, bool sendClose = true)
+        internal static async Task Send(byte[] data, bool longFlash = false)
         {
             if (Device == null)
-                throw new Exception("No device connected!");
+                throw new Exception("No device connected! Use DeviceDiscoveryManager to initialize first.");
 
             // Open signal, causes the long flash
-            if (flash)
+            if (longFlash)
             {
                 byte[] __open = new byte[4] { 0x04, 0x01, 0x00, 0x01 };
-                __open = SGKHelper.PadWithZeroes(__open);
-                await Device.WriteAndReadAsync(__open);
+                await PadAndSend(__open);
             }
 
             // Data
-            data = SGKHelper.PadWithZeroes(data);
-            await Device.WriteAndReadAsync(data);
+            await PadAndSend(data);
 
-            await SendCloseSignal();
+            byte[] __close = new byte[4] { 0x04, 0x02, 0x00, 0x02 };
+            await PadAndSend(__close);
         }
 
-        private static async Task SendCloseSignal()
+        private static Task PadAndSend(byte[] data)
         {
-            byte[] __close = new byte[4] { 0x04, 0x02, 0x00, 0x02 };
-            __close = SGKHelper.PadWithZeroes(__close);
-            await Device.WriteAndReadAsync(__close);
+            data = SGKHelper.PadWithZeroes(data);
+            return Device.WriteAndReadAsync(data);
         }
     }
 }

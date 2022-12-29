@@ -1,15 +1,10 @@
-﻿using Device.Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SGK3
+﻿namespace SGK3
 {
+    /// <summary>
+    /// Allows general brightness control.
+    /// </summary>
     public static class BrightnessManager
     {
-
         private static readonly List<byte[]> _brightnessCodes = new()
         {
             { new byte[2]{0x08, 0x00} }, // 6 brightness levels, including 0
@@ -20,8 +15,13 @@ namespace SGK3
             { new byte[2]{0x0d, 0x05} }
         };
 
-
-        public static async Task SetBrightnessLevel(int level)
+        /// <summary>
+        /// Sets the brightness level of they keyboard.
+        /// </summary>
+        /// <param name="level"> Level of brightness, valid range 0-5. </param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"> Thrown if <paramref name="level"/> is not between 0 and 5. </exception>
+        public static Task SetBrightnessLevel(int level)
         {
             if (level < 0)
                 throw new ArgumentOutOfRangeException(nameof(level), "Brightness may not be negative.");
@@ -33,10 +33,13 @@ namespace SGK3
             List<byte> message = new();
             message.Add(SGKHelper.Prefix);
             message.Add(_brightnessCodes[level][0]);
+
             message.AddRange(new byte[] {0x00, 0x06, 0x01, 0x01, 0x00, 0x00});
+
             message.Add(_brightnessCodes[level][1]);
 
-            await ComManager.Send(message.ToArray());
+
+            return ComManager.Send(message.ToArray());
         }
     }
 }
