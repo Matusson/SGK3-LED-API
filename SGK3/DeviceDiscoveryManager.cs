@@ -50,5 +50,13 @@ namespace SGK3LEDAPI
             ComManager.Device = keyboardDevice;
             await keyboardDevice.InitializeAsync();
         }
+
+        /// <summary>
+        /// Dispose of the device.
+        /// </summary>
+        public static void DisposeDevice()
+        {
+            ComManager.Device.Dispose();
+        }
     }
 }
