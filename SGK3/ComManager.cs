@@ -40,6 +40,5 @@ namespace SGK3
             __close = SGKHelper.PadWithZeroes(__close);
             await Device.WriteAndReadAsync(__close);
         }
-
     }
 }
