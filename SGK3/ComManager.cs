@@ -18,12 +18,12 @@ namespace SGK3
         /// <param name="flash"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static async Task Send(byte[] data, bool flash = false)
+        public static async Task Send(byte[] data, bool flash = false, bool sendClose = true)
         {
             if (Device == null)
                 throw new Exception("No device connected!");
 
-            // Open signal, causes the flash
+            // Open signal, causes the long flash
             if (flash)
             {
                 byte[] __open = new byte[4] { 0x04, 0x01, 0x00, 0x01 };
@@ -35,7 +35,11 @@ namespace SGK3
             data = SGKHelper.PadWithZeroes(data);
             await Device.WriteAndReadAsync(data);
 
-            // Close signal
+            await SendCloseSignal();
+        }
+
+        private static async Task SendCloseSignal()
+        {
             byte[] __close = new byte[4] { 0x04, 0x02, 0x00, 0x02 };
             __close = SGKHelper.PadWithZeroes(__close);
             await Device.WriteAndReadAsync(__close);
