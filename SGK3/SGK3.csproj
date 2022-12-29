@@ -5,7 +5,24 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>SGK3LEDAPI</PackageId>
+    <Title>SGK3 LED API</Title>
+    <Authors>Matusson</Authors>
+    <Product>SGK3LEDAPI</Product>
+    <Description>C# API library for controlling the LEDs on the SGK3 keyboard.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Matusson/SGK3-LED-API</RepositoryUrl>
+    <PackageTags>api;sgk3;skiller;mech;sharkoon;led;rgb</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Device.Net" Version="4.2.1" />
